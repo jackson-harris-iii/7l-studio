@@ -30,6 +30,25 @@ Cloudflare Workers hosts the public HTML/CSS/JS and `/api/portfolio`. `build.mjs
 
 The site retains `noindex,nofollow` during its initial public preview. It can be shared directly while the portfolio is refined.
 
+## Hosting and domain ownership
+
+- GitHub: `jackson-harris-iii/7l-studio`; production branch `main`.
+- Cloudflare Worker: `7l-studio`, connected to that repository with Workers Builds.
+- Build command: `npm run check && npm test && npm run build`.
+- Deploy command: `npx wrangler deploy`. A push/merge to `main` publishes after
+  these checks pass, so merging is a release action.
+- Branch preview builds are currently disabled. The production fallback address is
+  https://7l-studio.jackson-harris3.workers.dev.
+- Production hostnames: `7lstudio.com` and `www.7lstudio.com`, recorded in
+  `wrangler.jsonc` as Worker custom domains.
+- Name.com retains the domain registration and renewal. Cloudflare handles DNS
+  and HTTPS. Assigned nameservers: `gerald.ns.cloudflare.com` and
+  `wanda.ns.cloudflare.com`.
+
+The nameserver change was submitted October 2, 2026. DNS propagation and certificate
+activation must be verified before treating the custom hostnames as live. No email
+service was configured on this domain during setup.
+
 ## Media
 
 `portfolio.json` holds an explicit selection of public SmugMug photographs and video clips. It includes Idyllwild Edited and Drone/Video, Late Checkout Favorites, Eli & Fur + Le Youth video favorites, and Nora En Pure Favorites. Nightshift and ADP material is excluded by source validation. No full-account crawling or mirroring occurs.

@@ -11,6 +11,9 @@ This adapts a plan → change → test → review → correct → human release 
 this repository. Guidance is committed and works in a fresh clone. Greptile's
 GitHub app and repository enablement trigger reviews; `AGENTS.md` alone does not.
 Configuration follows the [official Greptile file reference](https://www.greptile.com/docs/code-review/greptile-config-reference).
+Verified against that reference on October 2, 2026: `effort` accepts `base`,
+`plus`, `apex`, or `auto`; `autoReview` accepts `open`, `push`, and `rebase`.
+These are current configuration fields, not the older `triggerOnUpdates` alias.
 
 Risks: the repository is public; media privacy decisions must remain explicit;
 reviews may concern an older commit; a CI pass is not a live deployment check.
