@@ -2,6 +2,10 @@
 
 Photography and films by Jackson Harris III. Independent portfolio for music, people, and places.
 
+Contributors and coding agents: read [AGENTS.md](AGENTS.md) and the
+[development/review workflow](docs/development-workflow.md). Greptile review
+settings and context are versioned in `.greptile/`.
+
 ## Development
 
 Node.js 22.13+ and Python 3 are required for all checks.
@@ -25,6 +29,25 @@ npm run deploy
 Cloudflare Workers hosts the public HTML/CSS/JS and `/api/portfolio`. `build.mjs` copies exactly three approved assets into `dist/`; repository files and credentials are never deployed as static assets. `wrangler.jsonc` is the deployment configuration. GitHub Actions runs the checks on pushes and pull requests. Deployment requires a Cloudflare login; the checks do not.
 
 The site retains `noindex,nofollow` during its initial public preview. It can be shared directly while the portfolio is refined.
+
+## Hosting and domain ownership
+
+- GitHub: `jackson-harris-iii/7l-studio`; production branch `main`.
+- Cloudflare Worker: `7l-studio`, connected to that repository with Workers Builds.
+- Build command: `npm run check && npm test && npm run build`.
+- Deploy command: `npx wrangler deploy`. A push/merge to `main` publishes after
+  these checks pass, so merging is a release action.
+- Branch preview builds are currently disabled. The production fallback address is
+  https://7l-studio.jackson-harris3.workers.dev.
+- Production hostnames: `7lstudio.com` and `www.7lstudio.com`, recorded in
+  `wrangler.jsonc` as Worker custom domains.
+- Name.com retains the domain registration and renewal. Cloudflare handles DNS
+  and HTTPS. Assigned nameservers: `gerald.ns.cloudflare.com` and
+  `wanda.ns.cloudflare.com`.
+
+The nameserver change was submitted October 2, 2026. DNS propagation and certificate
+activation must be verified before treating the custom hostnames as live. No email
+service was configured on this domain during setup.
 
 ## Media
 
