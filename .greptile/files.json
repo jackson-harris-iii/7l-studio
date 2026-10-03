@@ -1,0 +1,7 @@
+{
+  "files": [
+    {"path": "AGENTS.md", "description": "Architecture, media privacy, and working agreement"},
+    {"path": "README.md", "description": "Actual setup and supported product behavior"},
+    {"path": "docs/development-workflow.md", "description": "Review evidence and release process"}
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "strictness": 2,
+  "commentTypes": ["logic", "syntax"],
+  "effort": "base",
+  "autoReview": ["open", "push", "rebase"],
+  "statusCheck": true,
+  "shouldUpdateDescription": false,
+  "autoApprove": {"enabled": false},
+  "summarySection": {"included": true},
+  "confidenceScoreSection": {"included": true}
+}

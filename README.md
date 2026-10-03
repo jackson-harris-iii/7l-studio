@@ -2,6 +2,10 @@
 
 Photography and films by Jackson Harris III. Independent portfolio for music, people, and places.
 
+Contributors and coding agents: read [AGENTS.md](AGENTS.md) and the
+[development/review workflow](docs/development-workflow.md). Greptile review
+settings and context are versioned in `.greptile/`.
+
 ## Development
 
 Node.js 22.13+ and Python 3 are required for all checks.
