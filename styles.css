@@ -9,3 +9,9 @@ body{-webkit-font-smoothing:antialiased}header{background:var(--dark);color:var(
 
 /* Preserve the full frame of the opening photograph at every viewport width. */
 .photo:first-child img{height:auto}
+
+/* Keep the featured vertical edit uncropped and its collection easy to explore. */
+.film-card.feature.portrait{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.feature.portrait .video-frame{width:100%;max-width:360px}
+.film-info .source-link{margin:0 20px 16px 0}
+@media(max-width:800px){.film-card.feature.portrait{grid-template-columns:1fr}.feature.portrait .video-frame{max-width:360px}}

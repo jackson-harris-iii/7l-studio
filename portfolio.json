@@ -11,8 +11,16 @@
     {"id":"vQJ3n7V","type":"photo","title":"A different rhythm","collection":"FWB · Idyllwild 2024","alt":"Two people sitting on a boulder above a pine-covered valley in Idyllwild","page":"https://jacksonharris.smugmug.com/Idyllwild/Edited/i-vQJ3n7V","src":"https://photos.smugmug.com/Idyllwild/Edited/i-vQJ3n7V/1/LjBTXHrqzGPjNHQzZhpT4NVfrhkxLrNcSNPQwQ7Pz/L/DSC01404-L.jpg"}
   ],
   "videos": [
-    {"id":"FtQQB2M","type":"video","title":"Eli & Fur + Le Youth","collection":"The Barn · Sacramento","description":"Hands in the air, afternoon light, and a room moving together. A selected moment from the event.","orientation":"landscape","page":"https://jacksonharris.smugmug.com/Eli---Fur---Le-Youth/Video/Photos-from-folder-favorites/i-FtQQB2M","src":"https://photos.smugmug.com/Eli---Fur---Le-Youth/Video/Photos-from-folder-favorites/i-FtQQB2M/0/MpfqffXcdVw6BbqHxg2qqNmBZd5zVqQBstW4qWfpL/1920D/C0171-1920D.mp4","poster":"https://photos.smugmug.com/Eli---Fur---Le-Youth/Video/Photos-from-folder-favorites/i-FtQQB2M/0/KdDQ5sFrZ49rMXdBZqVMXCrRWtRKt4jfsdDTWkhjD/X3/C0171-X3.jpg"},
-    {"id":"Cj45Xxj","type":"video","title":"Nora En Pure","collection":"The Barn · July 2024","description":"A closer perspective on the crowd and the stage.","orientation":"portrait","page":"https://jacksonharris.smugmug.com/Nora-En-Pure-Jul-2024/Favorites/i-Cj45Xxj","src":"https://photos.smugmug.com/Nora-En-Pure-Jul-2024/Favorites/i-Cj45Xxj/0/LN6P6BSV5RP8JBzwRjhPFJFf64pzWhNkPsJ3vSTVj/1920D/DJI_0057-1920D.mp4","poster":"https://photos.smugmug.com/Nora-En-Pure-Jul-2024/Favorites/i-Cj45Xxj/0/LJNK4fvp3rWq7g4Vkkf36RF3gRSXcWxLtXPXqFN7M/X3/DJI_0057-X3.jpg"},
-    {"id":"xPkmt2L","type":"video","title":"Above Idyllwild","collection":"FWB · Idyllwild 2024","description":"A little distance. A different sense of scale.","orientation":"landscape","page":"https://jacksonharris.smugmug.com/Idyllwild/Drone/Video/i-xPkmt2L","src":"https://photos.smugmug.com/Idyllwild/Drone/Video/i-xPkmt2L/0/L35RBcRjxQk7KhCFxcfBSQm6Brk3LgCWQHFXcLVT5/1920D/DJI_0167-1920D.mp4","poster":"https://photos.smugmug.com/Idyllwild/Drone/Video/i-xPkmt2L/0/NTvx2b9mRphzK2LGKZPdDd2hzJSPTDpPtGpqT49TX/X3/DJI_0167-X3.jpg"}
+    {
+      "id": "r9LGWxD",
+      "type": "video",
+      "title": "A weekend in Idyllwild",
+      "collection": "FWB · Idyllwild 2024",
+      "description": "From the runway to the pines. A finished recap of mountain days, sunset sets, and the people in between.",
+      "orientation": "portrait",
+      "page": "https://jacksonharris.smugmug.com/Idyllwild-1/Edited/i-r9LGWxD",
+      "src": "https://photos.smugmug.com/Idyllwild-1/Edited/i-r9LGWxD/0/M985tkzTPz5CfS97FJLZ5wLzq846gSKtChJsbzvqk/1920D/fwb%20recap-1920D.mp4",
+      "poster": "https://photos.smugmug.com/Idyllwild-1/Edited/i-r9LGWxD/0/LcgPqtvCKc42MJQdwfJQbHkzdLWpLZs2n99SVv6bT/X3/fwb%20recap-X3.jpg"
+    }
   ]
 }
