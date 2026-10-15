@@ -14,9 +14,9 @@ test('only approved HTTPS media collections pass, without URL credentials or que
   assert.equal(approvedURL(seed.hero.src,'media'),true);
   for(const s of ['https://evil.test/Idyllwild/Edited/i-a','https://jacksonharris.smugmug.com.evil.test/Idyllwild/Edited/i-a','https://jacksonharris.smugmug.com/Family/i-a',seed.hero.page+'?token=x','https://user:secret@jacksonharris.smugmug.com/Idyllwild/Edited/i-a'])assert.equal(approvedURL(s),false);
 });
-test('all six curated records validate and excluded old archive is absent',()=>{
-  const items=[seed.hero,...seed.photos,...seed.videos];assert.equal(items.length,6);items.forEach(validateItem);
-  assert.equal(new Set(items.map(i=>i.id)).size,6);
+test('all eight curated records validate and excluded old archive is absent',()=>{
+  const items=[seed.hero,...seed.photos,...seed.videos];assert.equal(items.length,8);items.forEach(validateItem);
+  assert.equal(new Set(items.map(i=>i.id)).size,8);
   assert.throws(()=>validateItem({...seed.hero,id:'wrong'}),/identity mismatch/);
 });
 test('size selection avoids originals and prefers a 1920-or-smaller web derivative',()=>{
@@ -50,7 +50,7 @@ test('server exposes only site assets and sanitized portfolio, not configuration
   const base=`http://127.0.0.1:${server.address().port}`;
   for(const path of ['/.env','/server.mjs','/portfolio.json','/qa/api-application.jpg'])assert.equal((await fetch(base+path)).status,404);
   assert.equal((await fetch(base+'/',{method:'POST'})).status,405);
-  const res=await fetch(base+'/api/portfolio');const data=await res.json();assert.equal(data.source,'curated-preview');assert.equal(data.videos.length,1);
+  const res=await fetch(base+'/api/portfolio');const data=await res.json();assert.equal(data.source,'curated-preview');assert.equal(data.videos.length,3);
   assert.equal((await fetch(base+'/')).status,200);
 });
 
@@ -75,4 +75,22 @@ test('finished film refresh requires both public video and poster derivatives',a
   assert.deepEqual(await reader(item),item);
   privacy='Private';assert.equal(await reader(item),null);
   privacy='Public';withPoster=false;assert.equal(await reader(item),null);
+});
+
+
+test('Barn films allow only the dedicated public source path',()=>{
+  for(const id of ['BCzVTrZ','cHxpfQP']){
+    const item=seed.videos.find(v=>v.id===id);assert.ok(item);
+    assert.equal(approvedURL(item.page),true);
+    assert.equal(approvedURL(item.src,'media'),true);
+    assert.equal(approvedURL(item.poster,'media'),true);
+    assert.equal(approvedURL(item.page.replace('/7L-Studio-Films/','/7L-Studio-Films-Private/')),false);
+    assert.equal(approvedURL(item.page.replace('/7L-Studio-Films/','/7L-Studio-Films/ADP/')),false);
+  }
+});
+test('one unavailable Barn film is omitted without hiding other selected work',async()=>{
+  const result=await refreshPortfolio(seed,async item=>item.id==='cHxpfQP'?null:item);
+  assert.deepEqual(result.videos.map(v=>v.id),['r9LGWxD','BCzVTrZ']);
+  assert.equal(result.photos.length,4);
+  assert.equal(result.hero.id,seed.hero.id);
 });

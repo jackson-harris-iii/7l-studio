@@ -1,4 +1,5 @@
 const allowedPaths = [
+  '/7L-Studio-Films/',
   '/Idyllwild/Edited/', '/Idyllwild-1/Edited/', '/Idyllwild/Drone/Video/',
   '/LateCheckout-05-2026/Favorites/',
   '/Eli---Fur---Le-Youth/Video/Photos-from-folder-favorites/',

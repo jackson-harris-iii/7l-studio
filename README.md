@@ -51,7 +51,7 @@ service was configured on this domain during setup.
 
 ## Media
 
-`portfolio.json` holds an explicit selection of public SmugMug photographs and video clips. It includes Idyllwild Edited and Late Checkout Favorites photographs, plus the finished `fwb recap.MP4` film (`r9LGWxD`) from the public Idyllwild-1/Edited gallery. The film opens with a plane landing and runs approximately 48 seconds. Previous individual camera clips were removed. Nora En Pure and Bob Moses edits are linked through the Instagram camera highlight until their standalone exports are located. Nightshift and ADP material is excluded by source validation. No full-account crawling or mirroring occurs.
+`portfolio.json` holds an explicit selection of public SmugMug photographs and video clips. It includes Idyllwild Edited and Late Checkout Favorites photographs, plus the finished `fwb recap.MP4` film (`r9LGWxD`) from the public Idyllwild-1/Edited gallery. The film opens with a plane landing and runs approximately 48 seconds. Previous individual camera clips were removed. The Nora En Pure drone pullback and finished Bob Moses recap are hosted in the public 7L-Studio-Films gallery, exported from the user-selected Photos originals. The screen recording with player controls is not used. Nightshift and ADP material is excluded by source validation. No full-account crawling or mirroring occurs.
 
 Video loads only on click, starts muted, and pauses other playing clips. Each film links to its source and full collection on SmugMug. The inquiry link opens Instagram; no booking is submitted by this website.
 
