@@ -9,7 +9,7 @@ const env={ASSETS:{fetch:async()=>new Response('<!doctype html><title>7L Studio<
 test('deployed handler serves the selection and enforces public asset boundaries',async()=>{
   const worker=makeWorker();
   const data=await (await worker.fetch(request('/api/portfolio'),env)).json();
-  assert.equal(data.photos.length,4);assert.equal(data.videos.length,1);
+  assert.equal(data.photos.length,4);assert.equal(data.videos.length,3);
   for(const path of ['/.env','/.git/config','/worker.mjs','/portfolio.json','/qa/api-application.jpg'])assert.equal((await worker.fetch(request(path),env)).status,404);
   const page=await worker.fetch(request('/'),env);
   assert.equal(page.status,200);assert.match(page.headers.get('Content-Security-Policy'),/frame-ancestors 'none'/);
