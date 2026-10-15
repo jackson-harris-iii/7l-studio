@@ -14,9 +14,9 @@ test('only approved HTTPS media collections pass, without URL credentials or que
   assert.equal(approvedURL(seed.hero.src,'media'),true);
   for(const s of ['https://evil.test/Idyllwild/Edited/i-a','https://jacksonharris.smugmug.com.evil.test/Idyllwild/Edited/i-a','https://jacksonharris.smugmug.com/Family/i-a',seed.hero.page+'?token=x','https://user:secret@jacksonharris.smugmug.com/Idyllwild/Edited/i-a'])assert.equal(approvedURL(s),false);
 });
-test('all eight curated records validate and excluded old archive is absent',()=>{
-  const items=[seed.hero,...seed.photos,...seed.videos];assert.equal(items.length,8);items.forEach(validateItem);
-  assert.equal(new Set(items.map(i=>i.id)).size,8);
+test('all six curated records validate and excluded old archive is absent',()=>{
+  const items=[seed.hero,...seed.photos,...seed.videos];assert.equal(items.length,6);items.forEach(validateItem);
+  assert.equal(new Set(items.map(i=>i.id)).size,6);
   assert.throws(()=>validateItem({...seed.hero,id:'wrong'}),/identity mismatch/);
 });
 test('size selection avoids originals and prefers a 1920-or-smaller web derivative',()=>{
@@ -50,6 +50,29 @@ test('server exposes only site assets and sanitized portfolio, not configuration
   const base=`http://127.0.0.1:${server.address().port}`;
   for(const path of ['/.env','/server.mjs','/portfolio.json','/qa/api-application.jpg'])assert.equal((await fetch(base+path)).status,404);
   assert.equal((await fetch(base+'/',{method:'POST'})).status,405);
-  const res=await fetch(base+'/api/portfolio');const data=await res.json();assert.equal(data.source,'curated-preview');assert.equal(data.videos.length,3);
+  const res=await fetch(base+'/api/portfolio');const data=await res.json();assert.equal(data.source,'curated-preview');assert.equal(data.videos.length,1);
   assert.equal((await fetch(base+'/')).status,200);
+});
+
+
+test('finished film uses only its approved public gallery, not upload archives',()=>{
+  const item=seed.videos[0];
+  assert.equal(item.id,'r9LGWxD');
+  assert.equal(item.orientation,'portrait');
+  assert.equal(approvedURL(new URL('./',item.page).href),true);
+  for(const path of ['Automatic-macOS-Uploads/Content-Creator/Idyllwild/Photos-from-folder-edited','Idyllwild-1/Private','Idyllwild-1/Edited/Nightshift']){
+    assert.equal(approvedURL(`https://jacksonharris.smugmug.com/${path}/i-${item.id}`),false);
+  }
+});
+test('finished film refresh requires both public video and poster derivatives',async()=>{
+  const item=seed.videos[0];
+  let privacy='Public',withPoster=true;
+  const reader=createReader({apiKey:'test-only',fetcher:async(url)=>{
+    if(url.pathname===`/api/v2/image/${item.id}`)return response({Image:{WebUri:item.page,Uris:{ImageAlbum:{Uri:'/api/v2/album/edited'},ImageSizeDetails:{Uri:`/api/v2/image/${item.id}!sizedetails`}}}});
+    if(url.pathname==='/api/v2/album/edited')return response({Album:{Name:'Edited',WebUri:new URL('./',item.page).href,Privacy:privacy,External:true}});
+    return response({ImageSizeDetails:{Video:{Url:item.src,Width:1080},...(withPoster?{Poster:{Url:item.poster,Width:1080}}:{})}});
+  }});
+  assert.deepEqual(await reader(item),item);
+  privacy='Private';assert.equal(await reader(item),null);
+  privacy='Public';withPoster=false;assert.equal(await reader(item),null);
 });

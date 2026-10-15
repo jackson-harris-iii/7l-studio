@@ -22,7 +22,7 @@ function photo(item,index) {
   return button;
 }
 function film(item,index) {
-  const card=element('article',`film-card ${index===0?'feature':item.orientation}`);
+  const card=element('article',`film-card ${item.orientation} ${index===0?'feature':''}`);
   const frame=element('div','video-frame');
   const video=element('video');video.poster=item.poster;video.preload='none';video.playsInline=true;video.muted=true;video.defaultMuted=true;video.setAttribute('aria-label',item.title);
   const play=element('button','play-film',`Play ${item.title}`);play.type='button';play.setAttribute('aria-label',`Play ${item.title}`);
@@ -36,7 +36,7 @@ function film(item,index) {
   video.addEventListener('play',()=>document.querySelectorAll('video').forEach(v=>{if(v!==video)v.pause();}));
   video.addEventListener('error',()=>{play.hidden=false;error.textContent='This clip is unavailable here. View it on SmugMug below.';});
   frame.append(video,play);
-  const info=element('div','film-info');info.append(element('p','eyebrow',`${String(index+1).padStart(2,'0')} / ${item.collection}`),element('h3','',item.title),element('p','film-description',item.description),link(item.page,'View source ↗'),error);
+  const info=element('div','film-info');info.append(element('p','eyebrow',`${String(index+1).padStart(2,'0')} / ${item.collection}`),element('h3','',item.title),element('p','film-description',item.description),link(item.page,'View film on SmugMug ↗'),link(new URL('./',item.page).href,'Explore the collection ↗'),error);
   card.append(frame,info);return card;
 }
 async function loadPortfolio() {
@@ -54,7 +54,7 @@ async function loadPortfolio() {
   }catch{
     status.textContent='Selected work is temporarily unavailable. You can still explore the collection below or inquire about a project.';
     document.querySelector('.hero-image').hidden=true;
-    document.querySelector('#video-grid').append(link('https://www.instagram.com/jackson.harris___/reel/Dd8aUajTZ2d/','Watch selected work on Instagram ↗'));
+    document.querySelector('#video-grid').append(link('https://www.instagram.com/stories/highlights/18031190329916377/','Watch selected work on Instagram ↗'));
   }
 }
 document.querySelector('#close-lightbox').addEventListener('click',()=>lightbox.close());
