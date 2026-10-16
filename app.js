@@ -29,8 +29,8 @@ function film(item,index) {
   const error=element('p','video-error');error.setAttribute('role','status');
   play.addEventListener('click',async()=>{
     document.querySelectorAll('video').forEach(v=>{if(v!==video)v.pause();});
-    if(!video.getAttribute('src'))video.src=item.src;
-    video.muted=false;video.controls=true;play.hidden=true;error.textContent='';
+    if(!video.getAttribute('src')){video.muted=false;video.src=item.src;}
+    video.controls=true;play.hidden=true;error.textContent='';
     try{await video.play();}catch{play.hidden=false;error.textContent='Playback could not start. Try again or view the source below.';}
   });
   video.addEventListener('play',()=>document.querySelectorAll('video').forEach(v=>{if(v!==video)v.pause();}));

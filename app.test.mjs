@@ -69,15 +69,18 @@ test('film starts only on request, enables sound, and pauses the previous film',
   assert.equal(first.video.muted,true);
 });
 
-test('rejected playback restores a usable Play button and retry clears the error',async()=>{
+test('rejected playback restores Play and retry preserves the visitor mute choice',async()=>{
   const {video,button,error}=playerHarness().makeFilm('Retry',0);
   video.rejectPlay=true;
   await button.emit('click');
   assert.equal(button.hidden,false);
   assert.match(error.textContent,/Try again/);
+  assert.equal(video.muted,false);
+  video.muted=true;
   video.rejectPlay=false;
   await button.emit('click');
   assert.equal(button.hidden,true);
   assert.equal(error.textContent,'');
   assert.equal(video.paused,false);
+  assert.equal(video.muted,true);
 });
