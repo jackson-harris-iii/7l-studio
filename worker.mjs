@@ -1,12 +1,13 @@
+import {handleInquiry} from './inquiry.mjs';
 import seed from './portfolio.json' with {type:'json'};
 import {createReader,refreshPortfolio,validateItem} from './smugmug.mjs';
 
 export const securityHeaders = {
   'X-Content-Type-Options':'nosniff',
   'Referrer-Policy':'strict-origin-when-cross-origin',
-  'Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' https://photos.smugmug.com; media-src https://photos.smugmug.com https://videos.smugmug.com; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+  'Content-Security-Policy':"default-src 'self'; script-src 'self' https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://photos.smugmug.com; media-src https://photos.smugmug.com https://videos.smugmug.com; connect-src 'self' https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
 };
-const paths = new Set(['/','/index.html','/app.js','/styles.css']);
+const paths = new Set(['/','/index.html','/app.js','/inquiry-ui.js','/styles.css']);
 export function makeWorker({fetcher=fetch,now=Date.now}={}) {
   let cache, pending, currentKey;
   async function portfolio(key) {
@@ -25,6 +26,11 @@ export function makeWorker({fetcher=fetch,now=Date.now}={}) {
     async fetch(request,env) {
       const url=new URL(request.url);
       const headers={...securityHeaders,'Cache-Control':'no-store'};
+      if(url.pathname==='/api/inquiry'){
+        const response=await handleInquiry(request,env,{fetcher});
+        Object.entries(headers).forEach(([key,value])=>response.headers.set(key,value));
+        return response;
+      }
       if(!['GET','HEAD'].includes(request.method))return new Response('Method not allowed',{status:405,headers:{...headers,Allow:'GET, HEAD'}});
       if(url.pathname==='/api/portfolio') {
         try{

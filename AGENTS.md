@@ -10,7 +10,7 @@ never import private client notes, credentials, raw media, or another project's 
 - `server.mjs`: loopback preview. `worker.mjs`: Cloudflare production entry point.
 - `smugmug.mjs`: shared, read-only media validation and API reader.
 - `portfolio.json`: explicit approved media selection, not a full-account catalog.
-- `build.mjs`: copies only the three public UI files to `dist/`.
+- `build.mjs`: copies only the four public UI files to `dist/`.
 
 Keep these responsibilities separate. Prefer small functions and minimal diffs;
 do not add frameworks, dependencies, abstractions, or broad refactors without a
@@ -36,8 +36,8 @@ or absolute paths for a fresh clone to work.
 - Mute video/audio before playback; keep muted unless audible playback is requested.
 - Preserve lazy video loading, keyboard access, focus restoration, and mobile layout.
 - Follow the existing 7L palette and editorial treatment in `styles.css`.
-- Keep curated preview versus live API status accurate. The inquiry link currently
-  opens Instagram; do not claim that a booking was submitted.
+- Keep curated preview versus live API status accurate. The inquiry section
+  uses a protected email form; an inquiry does not reserve or book a date.
 
 ## Verification and delivery
 

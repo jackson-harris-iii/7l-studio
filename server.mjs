@@ -4,7 +4,7 @@ import {fileURLToPath} from 'node:url';
 import {resolve,dirname} from 'node:path';
 import {createReader,refreshPortfolio,validateItem} from './smugmug.mjs';
 const root=dirname(fileURLToPath(import.meta.url));
-const assets = new Map([['/',['index.html','text/html']],['/styles.css',['styles.css','text/css']],['/app.js',['app.js','text/javascript']]]);
+const assets = new Map([['/',['index.html','text/html']],['/styles.css',['styles.css','text/css']],['/app.js',['app.js','text/javascript']],['/inquiry-ui.js',['inquiry-ui.js','text/javascript']]]);
 export function makeServer({apiKey=process.env.SMUGMUG_API_KEY,fetcher=fetch}={}) {
   let cache, pending;
   const reader=apiKey?createReader({apiKey,fetcher}):null;
@@ -24,7 +24,8 @@ export function makeServer({apiKey=process.env.SMUGMUG_API_KEY,fetcher=fetch}={}
     res.setHeader('X-Content-Type-Options','nosniff');
     res.setHeader('Referrer-Policy','strict-origin-when-cross-origin');
     res.setHeader('Cache-Control','no-store');
-    res.setHeader('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' https://photos.smugmug.com; media-src https://photos.smugmug.com https://videos.smugmug.com; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'");
+    res.setHeader('Content-Security-Policy',"default-src 'self'; script-src 'self' https://challenges.cloudflare.com; style-src 'self'; img-src 'self' https://photos.smugmug.com; media-src https://photos.smugmug.com https://videos.smugmug.com; connect-src 'self' https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; frame-ancestors 'none'; base-uri 'none'; form-action 'none'");
+    if(req.url==='/api/inquiry'){res.writeHead(503,{'Content-Type':'application/json'});return res.end(JSON.stringify({error:'Preview only. Send your inquiry from 7lstudio.com.'}));}
     if(req.method!=='GET'&&req.method!=='HEAD'){res.writeHead(405);return res.end();}
     let path;try{path=new URL(req.url,'http://localhost').pathname;}catch{res.writeHead(400);return res.end();}
     if(path==='/api/portfolio') {

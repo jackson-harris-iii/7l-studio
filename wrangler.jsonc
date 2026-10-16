@@ -8,6 +8,7 @@
     {"pattern": "7lstudio.com", "custom_domain": true},
     {"pattern": "www.7lstudio.com", "custom_domain": true}
   ],
+  "send_email": [{"name": "INQUIRY_EMAIL"}],
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
