@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "node server.mjs",
     "build": "node build.mjs",
-    "check": "node --check app.js && node --check server.mjs && node --check smugmug.mjs && node --check worker.mjs && python3 check.py",
+    "check": "node --check app.js && node --check inquiry-ui.js && node --check inquiry.mjs && node --check server.mjs && node --check smugmug.mjs && node --check worker.mjs && python3 check.py",
     "test": "node --test *.test.mjs",
     "deploy:check": "npm run build && wrangler deploy --dry-run",
     "deploy": "npm run check && npm test && npm run build && wrangler deploy"

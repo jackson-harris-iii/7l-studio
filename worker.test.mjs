@@ -31,5 +31,5 @@ test('deployed API fails closed after cache expiry and does not expose secrets',
 });
 test('build includes only approved public assets',async()=>{
   execFileSync(process.execPath,['build.mjs'],{cwd:new URL('.',import.meta.url)});
-  assert.deepEqual((await readdir(new URL('./dist/',import.meta.url))).sort(),['app.js','index.html','styles.css']);
+  assert.deepEqual((await readdir(new URL('./dist/',import.meta.url))).sort(),['app.js','index.html','inquiry-ui.js','styles.css']);
 });
